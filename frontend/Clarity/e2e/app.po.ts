@@ -1,6 +1,6 @@
 import { browser, element, by } from 'protractor';
 
-export class BlueHopPage {
+export class ClarityPage {
   navigateTo() {
     return browser.get('/');
   }

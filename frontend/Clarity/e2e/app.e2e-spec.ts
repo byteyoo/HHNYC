@@ -1,10 +1,10 @@
-import { BlueHopPage } from './app.po';
+import { ClarityPage } from './app.po';
 
-describe('blue-hop App', () => {
-  let page: BlueHopPage;
+describe('clarity App', () => {
+  let page: ClarityPage;
 
   beforeEach(() => {
-    page = new BlueHopPage();
+    page = new ClarityPage();
   });
 
   it('should display message saying app works', () => {
