@@ -17,6 +17,12 @@ public abstract class HealthDataType {
         this.simpleName = simpleName;
     }
 
+    HealthDataType(String uid, String simpleName, String[] projection){
+        this.uid = uid;
+        this.simpleName = simpleName;
+        this.projection = projection;
+    }
+
     public abstract void resetDataset();
     public abstract void addValue(Cursor c);
     public abstract String getJson();

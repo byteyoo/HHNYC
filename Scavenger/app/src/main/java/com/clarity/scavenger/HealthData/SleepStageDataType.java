@@ -1,7 +1,9 @@
 package com.clarity.scavenger.HealthData;
 
 import android.database.Cursor;
+import android.util.Log;
 
+import com.clarity.scavenger.MainActivity;
 import com.google.gson.Gson;
 import com.samsung.android.sdk.healthdata.HealthConstants;
 
@@ -16,7 +18,7 @@ public class SleepStageDataType extends HealthDataType {
     private class DataPoint {
         long startTime;
         long endTime;
-        String stage;
+        int stage;
     }
 
     private ArrayList<DataPoint> mDataset;
@@ -34,9 +36,10 @@ public class SleepStageDataType extends HealthDataType {
     @Override
     public void addValue(Cursor c) {
         DataPoint dp = new DataPoint();
-        dp.startTime = c.getInt(c.getColumnIndex(HealthConstants.SessionMeasurement.START_TIME));
-        dp.endTime = c.getInt(c.getColumnIndex(HealthConstants.SessionMeasurement.END_TIME));
-        dp.stage = c.getString(c.getColumnIndex(HealthConstants.SleepStage.STAGE));
+        Log.d(MainActivity.APP_TAG, c.toString());
+        dp.startTime = c.getInt(c.getColumnIndex(HealthConstants.SleepStage.START_TIME));
+        dp.endTime = c.getInt(c.getColumnIndex(HealthConstants.SleepStage.END_TIME));
+        dp.stage = c.getInt(c.getColumnIndex(HealthConstants.SleepStage.STAGE));
         mDataset.add(dp);
     }
 

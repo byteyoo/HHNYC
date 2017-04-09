@@ -21,7 +21,7 @@ public class HRDataType extends HealthDataType {
     }
 
     private class DataPoint {
-        int timestamp;
+        long timestamp;
         int heartrate;
     }
 
@@ -33,7 +33,7 @@ public class HRDataType extends HealthDataType {
     @Override
     public void addValue(Cursor c) {
         DataPoint dp = new DataPoint();
-        dp.timestamp = c.getInt(c.getColumnIndex(HealthConstants.Common.CREATE_TIME));
+        dp.timestamp = c.getLong(c.getColumnIndex(HealthConstants.Common.CREATE_TIME));
         dp.heartrate =  c.getInt(c.getColumnIndex(HealthConstants.HeartRate.HEART_RATE));
         mDataset.add(dp);
     }

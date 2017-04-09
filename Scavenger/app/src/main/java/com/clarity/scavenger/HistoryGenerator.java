@@ -3,10 +3,10 @@ package com.clarity.scavenger;
 import android.database.Cursor;
 import android.util.Log;
 
+import com.clarity.scavenger.HealthData.ExerciseDataType;
 import com.clarity.scavenger.HealthData.HRDataType;
 import com.clarity.scavenger.HealthData.HealthDataType;
 import com.clarity.scavenger.HealthData.SleepDataType;
-import com.clarity.scavenger.HealthData.SleepStageDataType;
 import com.clarity.scavenger.HealthData.StepCountDataType;
 import com.samsung.android.sdk.healthdata.HealthConstants;
 import com.samsung.android.sdk.healthdata.HealthDataResolver;
@@ -29,7 +29,7 @@ public class HistoryGenerator {
             new StepCountDataType(),
             new HRDataType(),
             new SleepDataType(),
-            new SleepStageDataType()
+            new ExerciseDataType()
     };
 
     HistoryGenerator(HealthDataStore store){
@@ -49,7 +49,7 @@ public class HistoryGenerator {
     private void getDataforHealthDataType(int id, HealthDataType datatype) {
         HealthDataResolver resolver = new HealthDataResolver(mStore, null);
         long startTime = getStartTime();
-        long endTime = getEndTime();
+        long endTime = System.currentTimeMillis();
 
         HealthDataResolver.Filter filter = Filter.and(Filter.greaterThanEquals(HealthConstants.SessionMeasurement.START_TIME, startTime),
                 Filter.lessThanEquals(HealthConstants.SessionMeasurement.START_TIME, endTime));
@@ -70,17 +70,7 @@ public class HistoryGenerator {
 
     private long getStartTime(){
         Calendar start = Calendar.getInstance();
-        start.add(Calendar.DATE, -30);
-
-        start.set(Calendar.HOUR_OF_DAY, 0);
-        start.set(Calendar.MINUTE, 0);
-        start.set(Calendar.SECOND, 0);
-        start.set(Calendar.MILLISECOND, 0);
-        return start.getTimeInMillis();
-    }
-
-    private long getEndTime(){
-        Calendar start = Calendar.getInstance();
+        start.add(Calendar.MONTH, -1);
 
         start.set(Calendar.HOUR_OF_DAY, 0);
         start.set(Calendar.MINUTE, 0);

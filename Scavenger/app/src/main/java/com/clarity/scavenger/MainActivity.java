@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.clarity.scavenger.HealthData.HealthDataType;
 import com.samsung.android.sdk.healthdata.HealthConnectionErrorResult;
@@ -19,6 +20,10 @@ import com.samsung.android.sdk.healthdata.HealthDataStore;
 import com.samsung.android.sdk.healthdata.HealthPermissionManager;
 import com.samsung.android.sdk.healthdata.HealthResultHolder;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -214,13 +219,13 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private void addDataset(String buttonText, String json){
+    private void addDataset(HealthDataType dataType){
         Button button = new Button(this);
-        button.setText(buttonText);
+        button.setText(dataType.simpleName);
         mRootView.addView(button);
         final TextView output = new TextView(this);
         output.setVisibility(View.GONE);
-        output.setText(json);
+        output.setText(dataType.getJson());
         mRootView.addView(output);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -233,7 +238,36 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private String createOrGetDirectory(){
+        // Get the directory for the user's public pictures directory.
+        File file = new File(getExternalFilesDir(null), "Scavenger");
+        if (!file.mkdirs()) {
+            Log.e(APP_TAG, "Directory not created");
+        }
+        return file.getAbsolutePath();
+    }
+
+    private void saveToJSON(HealthDataType dataType) {
+        try {
+            String dirPath = createOrGetDirectory();
+            String fileName = dataType.simpleName + ".json";
+            File file = new File(dirPath, fileName);
+            if (!file.exists()) {
+                OutputStream stream =  new FileOutputStream(file, true);
+                OutputStreamWriter out = new OutputStreamWriter(stream);
+                out.write(dataType.getJson());
+                out.close();
+                Toast.makeText(getApplicationContext(), dataType.simpleName + " saved", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "File already exists: " + dataType.simpleName, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e){
+            Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
     public void showDataFetchResult(HealthDataType dataType) {
-        addDataset(dataType.simpleName, dataType.getJson());
+        addDataset(dataType);
+        saveToJSON(dataType);
     }
 }

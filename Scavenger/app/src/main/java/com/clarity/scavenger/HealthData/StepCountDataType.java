@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class StepCountDataType extends HealthDataType {
 
     private class DataPoint {
-        int timestamp;
+        long timestamp;
         int stepcount;
     }
 
@@ -33,7 +33,7 @@ public class StepCountDataType extends HealthDataType {
     @Override
     public void addValue(Cursor c) {
         DataPoint dp = new DataPoint();
-        dp.timestamp = c.getInt(c.getColumnIndex(HealthConstants.Common.CREATE_TIME));
+        dp.timestamp = c.getLong(c.getColumnIndex(HealthConstants.Common.CREATE_TIME));
         dp.stepcount = c.getInt(c.getColumnIndex(HealthConstants.StepCount.COUNT));
         mDataset.add(dp);
     }
