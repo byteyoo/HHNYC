@@ -1,7 +1,7 @@
 ## Clarity: Health Insights
 
-(http://imgur.com/a/uZ8OX)
-(http://imgur.com/a/Z1qPb)
+![Green Clarity Banner](http://imgur.com/a/uZ8OX)
+![Chocolate Clarity Banner](http://imgur.com/a/Z1qPb)
 
 
 ## Inspiration
