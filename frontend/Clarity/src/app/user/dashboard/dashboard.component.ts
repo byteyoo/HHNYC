@@ -313,156 +313,47 @@ export class DashboardComponent implements OnInit {
   public mainChartLegend: boolean = false;
   public mainChartType: string = 'line';
 
-  // social box charts
 
-  public socialChartData1: Array<any> = [
-    {
-      data: [65, 59, 84, 84, 51, 55, 40],
-      label: 'Facebook'
-    }
-  ];
-  public socialChartData2: Array<any> = [
-    {
-      data: [1, 13, 9, 17, 34, 41, 38],
-      label: 'Twitter'
-    }
-  ];
-  public socialChartData3: Array<any> = [
-    {
-      data: [78, 81, 80, 45, 34, 12, 40],
-      label: 'LinkedIn'
-    }
-  ];
-  public socialChartData4: Array<any> = [
-    {
-      data: [35, 23, 56, 22, 97, 23, 64],
-      label: 'Google+'
-    }
-  ];
-
-  public socialChartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  public socialChartOptions: any = {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      xAxes: [{
-        display: false,
-      }],
-      yAxes: [{
-        display: false,
-      }]
-    },
-    elements: {
-      line: {
-        borderWidth: 2
-      },
-      point: {
-        radius: 0,
-        hitRadius: 10,
-        hoverRadius: 4,
-        hoverBorderWidth: 3,
-      }
-    },
-    legend: {
-      display: false
-    }
-  };
-  public socialChartColours: Array<any> = [
-    {
-      backgroundColor: 'rgba(255,255,255,.1)',
-      borderColor: 'rgba(255,255,255,.55)',
-      pointHoverBackgroundColor: '#fff'
-    }
-  ];
-  public socialChartLegend: boolean = false;
-  public socialChartType: string = 'line';
-
-  // sparkline charts
-
-  public sparklineChartData1: Array<any> = [
-    {
-      data: [35, 23, 56, 22, 97, 23, 64],
-      label: 'Clients'
-    }
-  ];
-  public sparklineChartData2: Array<any> = [
-    {
-      data: [65, 59, 84, 84, 51, 55, 40],
-      label: 'Clients'
-    }
-  ];
-
-  public sparklineChartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  public sparklineChartOptions: any = {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      xAxes: [{
-        display: false,
-      }],
-      yAxes: [{
-        display: false,
-      }]
-    },
-    elements: {
-      line: {
-        borderWidth: 2
-      },
-      point: {
-        radius: 0,
-        hitRadius: 10,
-        hoverRadius: 4,
-        hoverBorderWidth: 3,
-      }
-    },
-    legend: {
-      display: false
-    }
-  };
-  public sparklineChartDefault: Array<any> = [
-    {
-      backgroundColor: 'transparent',
-      borderColor: '#d1d4d7',
-    }
-  ];
-  public sparklineChartPrimary: Array<any> = [
-    {
-      backgroundColor: 'transparent',
-      borderColor: this.brandPrimary,
-    }
-  ];
-  public sparklineChartInfo: Array<any> = [
-    {
-      backgroundColor: 'transparent',
-      borderColor: this.brandInfo,
-    }
-  ];
-  public sparklineChartDanger: Array<any> = [
-    {
-      backgroundColor: 'transparent',
-      borderColor: this.brandDanger,
-    }
-  ];
-  public sparklineChartWarning: Array<any> = [
-    {
-      backgroundColor: 'transparent',
-      borderColor: this.brandWarning,
-    }
-  ];
-  public sparklineChartSuccess: Array<any> = [
-    {
-      backgroundColor: 'transparent',
-      borderColor: this.brandSuccess,
-    }
-  ];
+  startDate: Date;
+  endDate: Date;
+  startDateString: string;
 
 
-  public sparklineChartLegend: boolean = false;
-  public sparklineChartType: string = 'line';
+  resetToZeroDate(date: Date) {
+    date.setHours(0, 0, 0, 0);
+    return date;
+  }
 
+  resetToEndDay(date: Date) {
+    date.setHours(23, 59, 59, 0);
+    return date;
+  }
+
+  public next() {
+    this.startDate.setDate(this.startDate.getDate() + 1);
+    this.endDate.setDate(this.endDate.getDate() + 1);
+    this.update();
+  }
+
+  public prev() {
+    this.startDate.setDate(this.startDate.getDate() - 1);
+    this.endDate.setDate(this.endDate.getDate() - 1);
+    this.update();
+  }
+
+  update(){
+    this.startDateString = this.startDate.toDateString();
+
+  }
 
   ngOnInit(): void {
+    this.endDate = this.resetToEndDay(new Date());
+    this.startDate = this.resetToZeroDate(new Date());
+    this.prev();
+    this.prev();
+    
     // generate random values for mainChart
+
     for (let i = 0; i <= this.mainChartElements; i++) {
       this.mainChartData1.push(this.random(50, 200));
       this.mainChartData2.push(this.random(80, 100));
