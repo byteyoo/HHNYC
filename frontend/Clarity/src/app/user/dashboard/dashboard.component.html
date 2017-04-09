@@ -174,29 +174,4 @@
       </div>
     </div>
   </div>
-
-  <!--/.row-->
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="card">
-        <div class="card-block">
-          <div class="row">
-            <div class="col-sm-5">
-              <h2 class="card-title mb-0">Real Time Analysis</h2>
-            </div>
-            <!--/.col-->
-            <div class="col-sm-7 hidden-sm-down">
-              <button type="button" class="btn btn-primary float-right" (click)="startRealtime()"><i class="fa fa-download"></i> Start</button>
-            </div>
-            <!--/.col-->
-          </div>
-          <!--/.row-->
-          <div class="chart-wrapper" style="height:600px;margin-top:40px;">
-            <canvas baseChart class="chart" [datasets]="realtimeChartData" [labels]="realtimeChartLabels" [options]="realtimeChartOptions"
-              [colors]="realtimeChartColours" [legend]="realtimeChartLegend" [chartType]="realtimeChartType"></canvas>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>

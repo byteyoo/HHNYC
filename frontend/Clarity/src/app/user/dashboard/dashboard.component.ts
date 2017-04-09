@@ -1,5 +1,7 @@
+import { Observable } from 'rxjs/Rx';
 import { Http } from '@angular/http';
 import { Component, OnInit } from '@angular/core';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-dashboard',
@@ -615,92 +617,5 @@ export class DashboardComponent implements OnInit {
       this.markCandidates = [];
     });
   }
-
-
-  public realtimeChartElements: number = 27;
-  public realtimeChartData1: Array<number> = [];
-  public realtimeChartData2: Array<number> = [];
-  public realtimeChartData3: Array<number> = [];
-
-  public realtimeChartData: Array<any> = [
-    {
-      data: this.realtimeChartData1,
-      label: 'Current'
-    },
-    {
-      data: this.realtimeChartData2,
-      label: 'Previous'
-    },
-    {
-      data: this.realtimeChartData3,
-      label: 'BEP'
-    }
-  ];
-  public realtimeChartLabels: Array<any> = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Thursday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  public realtimeChartOptions: any = {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      xAxes: [{
-        gridLines: {
-          drawOnChartArea: false,
-        },
-        ticks: {
-          callback: function (value: any) {
-            return new Date(value).toLocaleDateString() + " @ " + new Date(value).toLocaleTimeString();
-          }
-        }
-      }],
-      yAxes: [{
-        ticks: {
-          beginAtZero: true,
-          maxTicksLimit: 1,
-          stepSize: 1,
-          max: 4
-        }
-      }]
-    },
-    showline: false,
-    elements: {
-      line: {
-        borderWidth: 0
-      },
-      point: {
-        radius: 4,
-        hitRadius: 5,
-        hoverRadius: 4,
-        hoverBorderWidth: 3,
-      }
-    },
-    legend: {
-      display: false
-    }
-  };
-  public realtimeChartColours: Array<any> = [
-    { // brandInfo
-      backgroundColor: this.convertHex(this.brandInfo, 10),
-      borderColor: this.brandInfo,
-      pointHoverBackgroundColor: '#fff'
-    },
-    { // brandDanger
-      backgroundColor: 'transparent',
-      borderColor: this.brandSuccess,
-      pointHoverBackgroundColor: '#fff',
-      borderWidth: 0,
-      showLine: false,
-      borderDash: [8, 5]
-    },
-    { // brandDanger
-      backgroundColor: 'transparent',
-      borderColor: this.brandDanger,
-      pointHoverBackgroundColor: '#fff',
-      borderWidth: 0,
-      showLine: false,
-      borderDash: [8, 5]
-    }
-  ];
-  public realtimeChartLegend: boolean = false;
-  public realtimeChartType: string = 'line';
-
 
 }
