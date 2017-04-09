@@ -1,5 +1,9 @@
 ## Clarity: Health Insights
 
+(http://imgur.com/a/uZ8OX)
+(http://imgur.com/a/Z1qPb)
+
+
 ## Inspiration
 Currently despite there being great devices out there to measure health, it is often difficult for physicians to make use of this data. Data is fragmented, not time sensitive and often noisy. Correlations are often missed leading to serious health consequences. We looked to find a solution to combine all this vital data, bringing feedback to patients and physicians.
 
